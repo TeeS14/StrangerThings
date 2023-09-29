@@ -1,37 +1,11 @@
-
-
+import React from "react";
+import { useState } from "react";
 
 export default function Register () {
-  // const [register, setRegister] = useState ("");
-    const register = async()=> {
-    try {
-      const response = await fetch(
-        `https://strangers-things.herokuapp.com/api/2302-ACC-CT-WEB-PT-A/users/register`, {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          user: {
-            username: 'superman27',
-            password: 'krypt0n0rbust'
-          }
-        })
-      });
-      if (response.ok) {
-        const result = await response.json();
-        console.log(result);
-    } else {
-      console.error('Registration failed');
-    }
-    
-// You can log ▲▲▲ the result
-// here ▼▼▼ to view the json object before returning it
-      // console.log(result)
-    } catch (err) {
-      console.error(err);
-    }
-  }
+  
+ const [username, setUsername] = useState ("");
+ const [password, setPassword] = useState("");
+
 
 
 
@@ -65,15 +39,15 @@ const handleSubmit = async (e) => {
     console.error(err);
   }
 }
-return(
+
+return (
 <form onSubmit={handleSubmit}>
   <label>Username:</label>
-    <input type='text' name='username' required/>
-  
+    <input type='text' name='username' value={username} onChange={e => setUsername(e.target.value)} required/>
   <div>
   <label>
   Password:
-    <input type='text' name='password' required/>
+    <input type='text' name='password' value={password} onChange={e => setPassword(e.target.value)} required/>
   </label>
   </div>
   <button type="submit">Sign Up</button>
